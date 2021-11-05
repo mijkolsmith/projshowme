@@ -37,9 +37,15 @@ public class PlayerController : MonoBehaviour
 		bool wasGrounded = m_Grounded;
 		m_Grounded = false;
 
-		// The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
+		// The player is grounded if a Physics Raycast to the groundcheck position hits anything designated as ground
 		// This can be done using layers instead but Sample Assets will not overwrite your project settings.
-		Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
+		//Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
+		Debug.DrawLine(new Vector3(m_GroundCheck.localPosition.x - .15f, m_GroundCheck.localPosition.y + .01f, 90), new Vector3(m_GroundCheck.localPosition.x + .15f, m_GroundCheck.localPosition.y - .01f, 90), Color.red);
+		Collider2D[] colliders = Physics2D.OverlapAreaAll(
+			new Vector2(m_GroundCheck.localPosition.x - .15f, m_GroundCheck.localPosition.y + .01f),
+			new Vector2(m_GroundCheck.localPosition.x + .15f, m_GroundCheck.localPosition.y - .01f),
+			m_WhatIsGround);
+
 		for (int i = 0; i < colliders.Length; i++)
 		{
 			if (colliders[i].gameObject != gameObject)
