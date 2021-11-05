@@ -205,6 +205,8 @@ MonoBehaviour:
   jump: 0
   crouch: 0
   bulletGO: {fileID: 0}
+  seconds: 0
+  coolDownTimer: 0
 --- !u!61 &87444207
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2226,6 +2228,8 @@ MonoBehaviour:
   jump: 0
   crouch: 0
   bulletGO: {fileID: 0}
+  seconds: 0
+  coolDownTimer: 0
 --- !u!61 &1054610853
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3326,8 +3330,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   finishText1: {fileID: 962418197}
-  finishText2: {fileID: 0}
-  finishText3: {fileID: 0}
+  finishText2: {fileID: 1547134521}
+  finishText3: {fileID: 300899411}
 --- !u!1 &1371851760
 GameObject:
   m_ObjectHideFlags: 0
@@ -4438,6 +4442,8 @@ MonoBehaviour:
   jump: 0
   crouch: 0
   bulletGO: {fileID: 0}
+  seconds: 0
+  coolDownTimer: 0
 --- !u!1 &1902065002
 GameObject:
   m_ObjectHideFlags: 0

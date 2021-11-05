@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FinishText : MonoBehaviour
 {
-    private int laps = 3;
+    private int laps = 4;
     public GameObject finishText1;
     public GameObject finishText2;
     public GameObject finishText3;
