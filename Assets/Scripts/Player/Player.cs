@@ -24,9 +24,9 @@ public class Player : MonoBehaviour
     public bool jump = false;
     public bool crouch = false;
     private bool canCrouch = false;
-    private readonly string horizontalString = "Player Horizontal";
-    private readonly string jumpString = "Player Vertical";
-    private readonly string shootString = "Player Shoot";
+    private string horizontalString;
+    private string jumpString;
+    private string shootString;
 
     public GameObject bulletGO;
     private float bulletSpeed = 15;
@@ -34,6 +34,9 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        horizontalString = gameObject.name + " Horizontal";
+        jumpString = gameObject.name + " Vertical";
+        shootString = gameObject.name + " Shoot";
         controller = GetComponent<PlayerController>();
         sr = GetComponent<SpriteRenderer>();
     }
