@@ -20,6 +20,7 @@ public class AbilityCooldown : MonoBehaviour
     {
         if (coolDownTimer == false)
         {
+            // A ability starts
             if (Input.GetKeyDown(KeyCode.A))
             {
                 coolDownTimer = true;
@@ -31,8 +32,10 @@ public class AbilityCooldown : MonoBehaviour
 
     private IEnumerator CooldownSeconds()
     {
+        // Timer starts - No ability possible
         yield return new WaitForSeconds(seconds);
 
+        // Timer ends - Ability possible
         coolDownTimer = false;
     }
 }

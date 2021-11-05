@@ -8,6 +8,7 @@ public class FinishText : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // Show finish text   
         finishText.SetActive(true);
     }
 }

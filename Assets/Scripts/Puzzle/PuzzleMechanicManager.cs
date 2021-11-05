@@ -11,6 +11,7 @@ public class PuzzleMechanicManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // If all triggers from PuzzleMechanic script are activated, open the wall
         if (activatedTrigger1.trigger && activatedTrigger2.trigger && activatedTrigger3.trigger == true)
         {
             Destroy(this.gameObject);
