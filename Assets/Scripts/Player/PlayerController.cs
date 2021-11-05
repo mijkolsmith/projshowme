@@ -11,6 +11,9 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private Transform m_CeilingCheck;                          // A position marking where to check for ceilings
 
 	const float k_GroundedRadius = .1f; // Radius of the overlap circle to determine if grounded
+	const float k_GroundModx = .15f;
+	const float k_GroundMody = .08f;
+
 	private bool m_Grounded;            // Whether or not the player is grounded
 	public Rigidbody2D m_Rigidbody2D;
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
@@ -40,10 +43,9 @@ public class PlayerController : MonoBehaviour
 		// The player is grounded if a Physics Raycast to the groundcheck position hits anything designated as ground
 		// This can be done using layers instead but Sample Assets will not overwrite your project settings.
 		//Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
-		Debug.DrawLine(new Vector3(m_GroundCheck.localPosition.x - .15f, m_GroundCheck.localPosition.y + .01f, 90), new Vector3(m_GroundCheck.localPosition.x + .15f, m_GroundCheck.localPosition.y - .01f, 90), Color.red);
 		Collider2D[] colliders = Physics2D.OverlapAreaAll(
-			new Vector2(m_GroundCheck.localPosition.x - .15f, m_GroundCheck.localPosition.y + .01f),
-			new Vector2(m_GroundCheck.localPosition.x + .15f, m_GroundCheck.localPosition.y - .01f),
+			new Vector2(m_GroundCheck.position.x - k_GroundModx, m_GroundCheck.position.y + k_GroundMody),
+			new Vector2(m_GroundCheck.position.x + k_GroundModx, m_GroundCheck.position.y - k_GroundMody),
 			m_WhatIsGround);
 
 		for (int i = 0; i < colliders.Length; i++)
