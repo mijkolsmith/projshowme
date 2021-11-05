@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     private bool invincible = false;
     SpriteRenderer sr;
+
     private IEnumerator Invincibility()
 	{
         invincible = true;
@@ -32,6 +33,12 @@ public class Player : MonoBehaviour
     private float bulletSpeed = 15;
     private bool shooting = false;
 
+    [SerializeField]
+    private float seconds;
+
+    [SerializeField]
+    private bool coolDownTimer;
+
     private void Start()
     {
         horizontalString = gameObject.name + " Horizontal";
@@ -39,6 +46,8 @@ public class Player : MonoBehaviour
         shootString = gameObject.name + " Shoot";
         controller = GetComponent<PlayerController>();
         sr = GetComponent<SpriteRenderer>();
+
+        coolDownTimer = false;
     }
 
     void Update()
@@ -52,6 +61,17 @@ public class Player : MonoBehaviour
 		{
             StartCoroutine(Shoot());
 		}
+
+        if (coolDownTimer == false)
+        {
+            // Ability 1 starts
+            if (Input.GetButtonDown(shootString))
+            {
+                coolDownTimer = true;
+
+                StartCoroutine(CooldownSeconds());
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -67,5 +87,14 @@ public class Player : MonoBehaviour
         //bullet.GetComponent<Bullet>().Initialize(Camera.main.ScreenToWorldPoint(Input.mousePosition), bulletSpeed);
         yield return new WaitForSeconds(.2f);
         shooting = false;
+    }
+
+    private IEnumerator CooldownSeconds()
+    {
+        // Timer starts - No ability possible
+        yield return new WaitForSeconds(seconds);
+
+        // Timer ends - Ability possible
+        coolDownTimer = false;
     }
 }
