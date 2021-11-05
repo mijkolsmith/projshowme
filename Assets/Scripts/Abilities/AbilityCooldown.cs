@@ -7,6 +7,7 @@ public class AbilityCooldown : MonoBehaviour
     [SerializeField]
     private float seconds;
 
+    [SerializeField]
     private bool coolDownTimer;
 
     // Start is called before the first frame update
@@ -18,16 +19,16 @@ public class AbilityCooldown : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (coolDownTimer == false)
-        {
-            // A ability starts
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                coolDownTimer = true;
+        //if (coolDownTimer == false)
+        //{
+        //    // A ability starts
+        //    if (Input.GetButtonDown(shootString))
+        //    {
+        //        coolDownTimer = true;
 
-                StartCoroutine(CooldownSeconds());
-            }
-        }
+        //        StartCoroutine(CooldownSeconds());
+        //    }
+        //}
     }
 
     private IEnumerator CooldownSeconds()
