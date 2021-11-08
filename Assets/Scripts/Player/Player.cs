@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -23,21 +24,16 @@ public class Player : MonoBehaviour
     public float horizontalMove = 0f;
     public float runSpeed = 40f;
     public bool jump = false;
-    public bool crouch = false;
-    private bool canCrouch = false;
     private string horizontalString;
     private string jumpString;
     private string shootString;
 
     public GameObject bulletGO;
-    private float bulletSpeed = 15;
     private bool shooting = false;
 
-    [SerializeField]
-    private float seconds;
-
-    [SerializeField]
-    private bool coolDownTimer;
+    public Image cooldownImage;
+    [SerializeField] private float cooldownTime;
+    [SerializeField] private bool isCooldown = false;
 
     private void Start()
     {
@@ -46,8 +42,6 @@ public class Player : MonoBehaviour
         shootString = gameObject.name + " Shoot";
         controller = GetComponent<PlayerController>();
         sr = GetComponent<SpriteRenderer>();
-
-        coolDownTimer = false;
     }
 
     void Update()
@@ -62,16 +56,26 @@ public class Player : MonoBehaviour
             StartCoroutine(Shoot());
 		}
 
-        if (coolDownTimer == false)
+        if (isCooldown == false)
         {
             // Ability 1 starts
             if (Input.GetButtonDown(shootString))
             {
-                coolDownTimer = true;
-
-                StartCoroutine(CooldownSeconds());
+                isCooldown = true;
             }
         }
+
+        if (isCooldown)
+		{
+            // Cooldown animation & Timer
+            cooldownImage.fillAmount += (1 / cooldownTime) * Time.deltaTime;
+
+            if (cooldownImage.fillAmount >= 1)
+			{
+                cooldownImage.fillAmount = 0;
+                isCooldown = false;
+			}
+		}
     }
 
     private void FixedUpdate()
@@ -87,14 +91,5 @@ public class Player : MonoBehaviour
         //bullet.GetComponent<Bullet>().Initialize(Camera.main.ScreenToWorldPoint(Input.mousePosition), bulletSpeed);
         yield return new WaitForSeconds(.2f);
         shooting = false;
-    }
-
-    private IEnumerator CooldownSeconds()
-    {
-        // Timer starts - No ability possible
-        yield return new WaitForSeconds(seconds);
-
-        // Timer ends - Ability possible
-        coolDownTimer = false;
     }
 }
