@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     private PlayerController controller;
     private float horizontalMove = 0f;
     public float runSpeed = 40f;
-    [HideInInspector] public float speedBoost;
+    public float speedBoost;
     private bool jump = false;
     private string horizontalString;
     private string jumpString;
