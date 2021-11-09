@@ -31,6 +31,9 @@ public class Player : MonoBehaviour
     private string jumpString;
     private string shootString;
 
+    public Ability ability;
+    GameObject boxPrefab;
+
     public GameObject bulletGO;
     private bool shooting = false;
 
@@ -67,6 +70,7 @@ public class Player : MonoBehaviour
             // Ability 1 starts
             if (Input.GetButtonDown(shootString))
             {
+                UseAbility();
                 isCooldown = true;
             }
         }
@@ -98,4 +102,20 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(.2f);
         shooting = false;
     }
+
+    void UseAbility()
+	{
+        if (ability == Ability.GRAPPLE)
+		{
+
+		}
+        if (ability == Ability.BOX)
+		{
+            Instantiate(boxPrefab, transform.localPosition, Quaternion.identity);
+		}
+        if (ability == Ability.TACKLE)
+		{
+
+		}
+	}
 }
