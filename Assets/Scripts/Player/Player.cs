@@ -22,11 +22,11 @@ public class Player : MonoBehaviour
         invincible = false;
 	}
 
-    public PlayerController controller;
-    public float horizontalMove = 0f;
-    public float baseSpeed = 40f;
-    private float runSpeed;
-    public bool jump = false;
+    private PlayerController controller;
+    private float horizontalMove = 0f;
+    public float runSpeed = 40f;
+    [HideInInspector] public float speedBoost;
+    private bool jump = false;
     private string horizontalString;
     private string jumpString;
     private string shootString;
@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float cooldownTime;
     [SerializeField] private bool isCooldown = false;
 
-    List<Player> players;
+    public List<Player> players;
 
     private void Start()
     {
@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        horizontalMove = Input.GetAxisRaw(horizontalString) * runSpeed;
+        horizontalMove = Input.GetAxisRaw(horizontalString) * (runSpeed + speedBoost);
         if (Input.GetButtonDown(jumpString))
         {
             jump = true;
@@ -98,15 +98,4 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(.2f);
         shooting = false;
     }
-
-	private void OnTriggerStay2D(Collider2D collision)
-	{
-        foreach(var player in players)
-		{
-            if (collision.gameObject == player.gameObject)
-            {
-                runSpeed = baseSpeed;
-            }
-        }
-	}
 }
