@@ -1,36 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SpeedBoost : MonoBehaviour
 {
-    Player player;
-    List<Player> players;
+    private Player player;
+    public float boost = 4f;
 
 	private void Start()
 	{
         player = GetComponentInParent<Player>();
-        players = player.players;
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
     {
-        foreach (var playerComp in players)
+        foreach (Player playerComponent in player.players)
         {
-            if (collision.gameObject == playerComp.gameObject)
+            if (collision.gameObject == playerComponent.gameObject)
             {
-                player.speedBoost += 44;
+                player.speedBoost += boost;
             }
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        foreach (var playerComp in players)
+        foreach (Player playerComponent in player.players)
         {
-            if (collision.gameObject == playerComp.gameObject)
+            if (collision.gameObject == playerComponent.gameObject)
             {
-                player.speedBoost -= 44;
+                player.speedBoost -= boost;
             }
         }
     }

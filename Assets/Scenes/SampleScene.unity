@@ -274,7 +274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f47c569e5115f479797603d8f6939c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runSpeed: 40
+  runSpeed: 20
   speedBoost: 0
   bulletGO: {fileID: 0}
   cooldownImage: {fileID: 289104590}
@@ -1257,6 +1257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a26093b54d982e4c8b0f5d5074065c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boost: 4
 --- !u!61 &301089616
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1575,6 +1576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a26093b54d982e4c8b0f5d5074065c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boost: 4
 --- !u!61 &487230879
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2730,7 +2732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f47c569e5115f479797603d8f6939c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runSpeed: 40
+  runSpeed: 20
   speedBoost: 0
   bulletGO: {fileID: 0}
   cooldownImage: {fileID: 654102154}
@@ -3734,6 +3736,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a26093b54d982e4c8b0f5d5074065c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boost: 4
 --- !u!1 &1322730231
 GameObject:
   m_ObjectHideFlags: 0
@@ -5135,7 +5138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f47c569e5115f479797603d8f6939c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runSpeed: 40
+  runSpeed: 20
   speedBoost: 0
   bulletGO: {fileID: 0}
   cooldownImage: {fileID: 19940086}
