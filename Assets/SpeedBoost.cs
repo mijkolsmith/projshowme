@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SpeedBoost : MonoBehaviour
 {
-    Player player;
+    private Player player;
+    public float boost = 4f;
 
 	private void Start()
 	{
@@ -17,7 +16,7 @@ public class SpeedBoost : MonoBehaviour
         {
             if (collision.gameObject == playerComponent.gameObject)
             {
-                player.speedBoost += 4;
+                player.speedBoost += boost;
             }
         }
     }
@@ -28,7 +27,7 @@ public class SpeedBoost : MonoBehaviour
         {
             if (collision.gameObject == playerComponent.gameObject)
             {
-                player.speedBoost -= 4;
+                player.speedBoost -= boost;
             }
         }
     }
