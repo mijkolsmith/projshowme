@@ -12,7 +12,7 @@ public class PuzzleMechanicManager : MonoBehaviour
     void Update()
     {
         // If all triggers from PuzzleMechanic script are activated, open the wall
-        if (activatedTrigger1.trigger && activatedTrigger2.trigger && activatedTrigger3.trigger == true)
+        if (activatedTrigger1.triggerOccupied && activatedTrigger2.triggerOccupied && activatedTrigger3.triggerOccupied == true)
         {
             Destroy(this.gameObject);
         }

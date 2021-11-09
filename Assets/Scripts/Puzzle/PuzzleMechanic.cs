@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class PuzzleMechanic : MonoBehaviour
 {
-    public bool trigger;
+    public Player triggerOccupied = null;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        trigger = true;
+        if (triggerOccupied == null)
+        {
+            triggerOccupied = collision.GetComponent<Player>();
+        }
     }
-
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        trigger = false;
+        if (triggerOccupied == collision.GetComponent<Player>())
+        {
+            triggerOccupied = null;
+        }
     }
 }
