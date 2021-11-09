@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GrapplingHook : MonoBehaviour
-{   
+{
+    public Player player;
+
     private void Update()
     {
         StartCoroutine(GrapplingHookDisable());
@@ -11,9 +13,17 @@ public class GrapplingHook : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.tag == "Player")
         {
-            collision.transform.position = new Vector2(gameObject.transform.position.x - 2, collision.transform.position.y);
+            Rigidbody2D targetRB = collision.GetComponent<Rigidbody2D>();
+            if (player.facingRight)
+            {
+                targetRB.AddForce(new Vector2(2000f, 400f));
+            }
+            else
+            {
+                targetRB.AddForce(new Vector2(-2000f, 400f));
+            }
             gameObject.SetActive(false);
         }
     }

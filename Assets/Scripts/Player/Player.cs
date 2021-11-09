@@ -43,6 +43,7 @@ public class Player : MonoBehaviour
     public List<Player> players;
 
     public GameObject grapplingHook;
+    public bool facingRight;
 
     private void Start()
     {
@@ -91,8 +92,9 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
+        controller.Move(horizontalMove * Time.fixedDeltaTime, jump);
         jump = false;
+        facingRight = controller.facingRight;
     }
 
     public IEnumerator Shoot()
@@ -109,6 +111,7 @@ public class Player : MonoBehaviour
         if (ability == Ability.GRAPPLE)
 		{
             grapplingHook.SetActive(true);
+            grapplingHook.GetComponent<GrapplingHook>().player = this;
 		}
         if (ability == Ability.BOX)
 		{
