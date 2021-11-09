@@ -32,14 +32,13 @@ public class Player : MonoBehaviour
     private string shootString;
 
     public Ability ability;
-    GameObject boxPrefab;
-
-    public GameObject bulletGO;
-    private bool shooting = false;
-
+    public GameObject boxPrefab;
     public Image cooldownImage;
     [SerializeField] private float cooldownTime;
     [SerializeField] private bool isCooldown = false;
+
+    public GameObject bulletGO;
+    private bool shooting = false;
 
     public List<Player> players;
 
@@ -113,9 +112,16 @@ public class Player : MonoBehaviour
 		{
             Instantiate(boxPrefab, transform.localPosition, Quaternion.identity);
 		}
-        if (ability == Ability.TACKLE)
+        if (ability == Ability.DASH)
 		{
-
+            StartCoroutine(Dash());
 		}
+	}
+
+    IEnumerator Dash()
+	{
+        speedBoost += 30;
+        yield return new WaitForSeconds(.3f);
+        speedBoost -= 30;
 	}
 }

@@ -276,10 +276,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runSpeed: 20
   speedBoost: 0
-  bulletGO: {fileID: 0}
+  ability: 2
+  boxPrefab: {fileID: 4220285522796058934, guid: 46401f31fdb5f324cb9b3aa702eb3083,
+    type: 3}
   cooldownImage: {fileID: 289104590}
-  cooldownTime: 3
-  isCooldown: 0
+  cooldownTime: 4
+  isCooldown: 1
+  bulletGO: {fileID: 0}
   players: []
 --- !u!61 &87444207
 BoxCollider2D:
@@ -3678,10 +3681,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runSpeed: 20
   speedBoost: 0
-  bulletGO: {fileID: 0}
+  ability: 0
+  boxPrefab: {fileID: 4220285522796058934, guid: 46401f31fdb5f324cb9b3aa702eb3083,
+    type: 3}
   cooldownImage: {fileID: 654102154}
-  cooldownTime: 3
-  isCooldown: 0
+  cooldownTime: 7
+  isCooldown: 1
+  bulletGO: {fileID: 0}
   players: []
 --- !u!61 &1054610853
 BoxCollider2D:
@@ -6849,10 +6855,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runSpeed: 20
   speedBoost: 0
-  bulletGO: {fileID: 0}
+  ability: 1
+  boxPrefab: {fileID: 4220285522796058934, guid: 46401f31fdb5f324cb9b3aa702eb3083,
+    type: 3}
   cooldownImage: {fileID: 19940086}
-  cooldownTime: 3
-  isCooldown: 0
+  cooldownTime: 5
+  isCooldown: 1
+  bulletGO: {fileID: 0}
   players: []
 --- !u!1 &1845013421
 GameObject:
