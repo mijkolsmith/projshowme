@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -22,7 +24,8 @@ public class Player : MonoBehaviour
 
     public PlayerController controller;
     public float horizontalMove = 0f;
-    public float runSpeed = 40f;
+    public float baseSpeed = 40f;
+    private float runSpeed;
     public bool jump = false;
     private string horizontalString;
     private string jumpString;
@@ -35,6 +38,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float cooldownTime;
     [SerializeField] private bool isCooldown = false;
 
+    List<Player> players;
+
     private void Start()
     {
         horizontalString = gameObject.name + " Horizontal";
@@ -42,6 +47,7 @@ public class Player : MonoBehaviour
         shootString = gameObject.name + " Shoot";
         controller = GetComponent<PlayerController>();
         sr = GetComponent<SpriteRenderer>();
+        players = transform.parent.GetComponentsInChildren<Player>().ToList();
     }
 
     void Update()
@@ -92,4 +98,15 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(.2f);
         shooting = false;
     }
+
+	private void OnTriggerStay2D(Collider2D collision)
+	{
+        foreach(var player in players)
+		{
+            if (collision.gameObject == player.gameObject)
+            {
+                runSpeed = baseSpeed;
+            }
+        }
+	}
 }
