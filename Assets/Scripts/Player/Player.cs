@@ -11,16 +11,16 @@ public class Player : MonoBehaviour
     SpriteRenderer sr;
 
     private IEnumerator Invincibility()
-	{
+    {
         invincible = true;
-		for (int i = 0; i < 10; i++)
-		{
+        for (int i = 0; i < 10; i++)
+        {
             sr.enabled = false;
             yield return new WaitForSeconds(.1f);
             sr.enabled = true;
         }
         invincible = false;
-	}
+    }
 
     private PlayerController controller;
     private float horizontalMove = 0f;
@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
     private string horizontalString;
     private string jumpString;
     private string shootString;
+    private string crouchString;
 
     public Ability ability;
     public GameObject boxPrefab;
@@ -45,11 +46,14 @@ public class Player : MonoBehaviour
     public GameObject grapplingHook;
     public bool facingRight;
 
+    public DisablePlatform disablePlatform;
+
     private void Start()
     {
         horizontalString = gameObject.name + " Horizontal";
         jumpString = gameObject.name + " Vertical";
         shootString = gameObject.name + " Shoot";
+        crouchString = gameObject.name + " Crouch";
         controller = GetComponent<PlayerController>();
         sr = GetComponent<SpriteRenderer>();
         players = transform.parent.GetComponentsInChildren<Player>().ToList();
@@ -63,8 +67,17 @@ public class Player : MonoBehaviour
             jump = true;
         }
         if (Input.GetButton(shootString) == true && shooting == false)
-		{
+        {
             StartCoroutine(Shoot());
+        }
+
+        if (Input.GetButton(crouchString))
+		{
+            Debug.Log(disablePlatform.standingOnPlatform);
+            if (disablePlatform != null && disablePlatform.standingOnPlatform == true)
+            {
+                StartCoroutine(disablePlatform.Disable());
+            }
 		}
 
         if (isCooldown == false)
@@ -78,16 +91,16 @@ public class Player : MonoBehaviour
         }
 
         if (isCooldown)
-		{
+        {
             // Cooldown animation & Timer
             cooldownImage.fillAmount += (1 / cooldownTime) * Time.deltaTime;
 
             if (cooldownImage.fillAmount >= 1)
-			{
+            {
                 cooldownImage.fillAmount = 0;
                 isCooldown = false;
-			}
-		}
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -107,26 +120,57 @@ public class Player : MonoBehaviour
     }
 
     void UseAbility()
-	{
+    {
         if (ability == Ability.GRAPPLE)
-		{
+        {
             grapplingHook.SetActive(true);
             grapplingHook.GetComponent<GrapplingHook>().player = this;
-		}
+        }
         if (ability == Ability.BOX)
-		{
+        {
             Instantiate(boxPrefab, transform.localPosition, Quaternion.identity);
-		}
+        }
         if (ability == Ability.DASH)
-		{
+        {
             StartCoroutine(Dash());
-		}
-	}
+        }
+    }
 
     IEnumerator Dash()
-	{
+    {
         speedBoost += 30;
         yield return new WaitForSeconds(.3f);
         speedBoost -= 30;
-	}
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+	{
+        // Crouch
+        if (collision.gameObject.layer == 3) // 3 for ground
+        {
+            Debug.Log(collision.gameObject.name + " enter");
+            if (disablePlatform == null)
+            {
+                disablePlatform = collision.gameObject.GetComponent<DisablePlatform>();
+            }
+            if (disablePlatform != null)
+            {
+                disablePlatform.standingOnPlatform = true;
+            }
+        }
+    }
+
+	private void OnCollisionExit2D(Collision2D collision)
+	{
+        // Crouch
+        if (collision.gameObject.layer == 3) // 3 for ground
+        {
+            Debug.Log(collision.gameObject.name + " exit");
+            if (disablePlatform != null)
+            {
+                disablePlatform.standingOnPlatform = false;
+                disablePlatform = null;
+            }
+        }
+    }
 }
