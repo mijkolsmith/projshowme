@@ -42,6 +42,8 @@ public class Player : MonoBehaviour
 
     public List<Player> players;
 
+    public GameObject grapplingHook;
+
     private void Start()
     {
         horizontalString = gameObject.name + " Horizontal";
@@ -106,7 +108,7 @@ public class Player : MonoBehaviour
 	{
         if (ability == Ability.GRAPPLE)
 		{
-
+            grapplingHook.SetActive(true);
 		}
         if (ability == Ability.BOX)
 		{
