@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FinishText : MonoBehaviour
+public class Finish : MonoBehaviour
 {
     private int laps = 4;
     public GameObject finishText1;
@@ -13,7 +13,7 @@ public class FinishText : MonoBehaviour
     private int count3 = 0;
 
     private void OnTriggerEnter2D(Collider2D collision)
-    {
+    {        
         if (collision.gameObject.name == "Player1")
 		{
             count1++;
@@ -26,6 +26,7 @@ public class FinishText : MonoBehaviour
         {
             count3++;
         }
+        
         // Show finish text   
         if (count1 >= laps)
         {

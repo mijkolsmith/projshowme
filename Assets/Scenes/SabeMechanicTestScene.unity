@@ -759,8 +759,8 @@ MonoBehaviour:
   bulletGO: {fileID: 0}
   players: []
   grapplingHook: {fileID: 700723844}
-  pullLeft: 0
-  pullRight: 0
+  facingRight: 0
+  disablePlatform: {fileID: 0}
 --- !u!61 &459629599
 BoxCollider2D:
   m_ObjectHideFlags: 0
