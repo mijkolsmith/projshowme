@@ -86,6 +86,7 @@ public class Player : MonoBehaviour
             {
                 UseAbility();
                 isCooldown = true;
+                cooldownImage.fillAmount = 0;
             }
         }
 
@@ -96,7 +97,7 @@ public class Player : MonoBehaviour
 
             if (cooldownImage.fillAmount >= 1)
             {
-                cooldownImage.fillAmount = 0;
+                cooldownImage.fillAmount = 1;
                 isCooldown = false;
             }
         }
@@ -123,7 +124,7 @@ public class Player : MonoBehaviour
         if (ability == Ability.GRAPPLE)
         {
             grapplingHook.SetActive(true);
-            grapplingHook.GetComponent<GrapplingHook>().player = this;
+			grapplingHook.GetComponent<GrapplingHook>().ExecuteCoroutine(this);
         }
         if (ability == Ability.BOX)
         {
@@ -138,7 +139,9 @@ public class Player : MonoBehaviour
     IEnumerator Dash()
     {
         speedBoost += 30;
+        controller.rigidbody2D.gravityScale -= 1;
         yield return new WaitForSeconds(.3f);
+        controller.rigidbody2D.gravityScale += 1;
         speedBoost -= 30;
     }
 
@@ -159,7 +162,6 @@ public class Player : MonoBehaviour
         // Crouch
         if (collision.gameObject.layer == 3) // 3 for ground
         {
-            Debug.Log(collision.gameObject.name + " exit");
             if (disablePlatform != null)
             {
                 disablePlatform = null;
