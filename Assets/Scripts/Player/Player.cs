@@ -73,8 +73,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetButton(crouchString))
 		{
-            Debug.Log(disablePlatform.standingOnPlatform);
-            if (disablePlatform != null && disablePlatform.standingOnPlatform == true)
+            if (disablePlatform != null)
             {
                 StartCoroutine(disablePlatform.Disable());
             }
@@ -148,14 +147,9 @@ public class Player : MonoBehaviour
         // Crouch
         if (collision.gameObject.layer == 3) // 3 for ground
         {
-            Debug.Log(collision.gameObject.name + " enter");
             if (disablePlatform == null)
             {
                 disablePlatform = collision.gameObject.GetComponent<DisablePlatform>();
-            }
-            if (disablePlatform != null)
-            {
-                disablePlatform.standingOnPlatform = true;
             }
         }
     }
@@ -168,7 +162,6 @@ public class Player : MonoBehaviour
             Debug.Log(collision.gameObject.name + " exit");
             if (disablePlatform != null)
             {
-                disablePlatform.standingOnPlatform = false;
                 disablePlatform = null;
             }
         }

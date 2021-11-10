@@ -18,11 +18,11 @@ public class GrapplingHook : MonoBehaviour
             Rigidbody2D targetRB = collision.GetComponent<Rigidbody2D>();
             if (player.facingRight)
             {
-                targetRB.AddForce(new Vector2(2000f, 400f));
+                targetRB.AddForce(new Vector2(3000f, 400f));
             }
             else
             {
-                targetRB.AddForce(new Vector2(-2000f, 400f));
+                targetRB.AddForce(new Vector2(-3000f, 400f));
             }
             gameObject.SetActive(false);
         }
