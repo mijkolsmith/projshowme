@@ -124,7 +124,7 @@ public class Player : MonoBehaviour
         if (ability == Ability.GRAPPLE)
         {
             grapplingHook.SetActive(true);
-			grapplingHook.GetComponent<GrapplingHook>().ExecuteCoroutine(this);
+			grapplingHook.GetComponentInChildren<GrapplingHook>().ExecuteCoroutine(this, grapplingHook.transform);
         }
         if (ability == Ability.BOX)
         {

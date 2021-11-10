@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class GrapplingHook : MonoBehaviour
 {
-    public Player player;
     bool colliding;
     Vector3 dir;
+    Transform rotate;
+    public GameObject ropeLoop;
 
-    public void ExecuteCoroutine(Player player)
+    public void ExecuteCoroutine(Player player, Transform rotate)
     {
-        this.player = player;
+        this.rotate = rotate;
 
         dir = player.GetComponentInChildren<Camera>().ScreenToWorldPoint(Input.mousePosition) - player.transform.localPosition;
         float angleRad;
@@ -25,7 +26,7 @@ public class GrapplingHook : MonoBehaviour
             angleRad = Mathf.Atan2(-dir.y, dir.x);
             angleDeg = (180 / Mathf.PI) * angleRad;
         }
-        transform.parent.localRotation = Quaternion.Euler(0, 0, angleDeg);
+        rotate.localRotation = Quaternion.Euler(0, 0, angleDeg);
 
         StartCoroutine(GrapplingHookDisable());
     }
@@ -38,10 +39,11 @@ public class GrapplingHook : MonoBehaviour
             Rigidbody2D targetRB = collision.GetComponent<Rigidbody2D>();
             targetRB.AddForce(new Vector2(-dir.normalized.x * 5000f, -dir.normalized.y * 2500f));
 
-            colliding = false;
-            transform.parent.localRotation = Quaternion.identity;
+            
+            rotate.localRotation = Quaternion.identity;
             transform.parent.localScale = new Vector3(1, 1, 1);
-            gameObject.SetActive(false);
+            colliding = false;
+            rotate.gameObject.SetActive(false);
         }
     }
 
@@ -49,12 +51,20 @@ public class GrapplingHook : MonoBehaviour
     {
         for (int i = 0; i < 50; i++)
 		{
-            transform.parent.localScale = new Vector3(transform.parent.localScale.x + 0.4f - i/100f, transform.parent.localScale.y, transform.parent.localScale.z);
+            float scaleChange = transform.parent.localScale.x + 0.4f - i / 100f;
+            transform.parent.localScale = new Vector3(scaleChange, transform.parent.localScale.y, transform.parent.localScale.z);
+            ropeLoop.transform.localPosition = new Vector3(transform.parent.localScale.x / -2f - 1f, ropeLoop.transform.localPosition.y, ropeLoop.transform.localPosition.z);
+            //Scale = 1 Pos = -1.5
+            //Scale = 2 Pos = -2
+            //Scale = 3 Pos = -2.5
+            //Scale = 4 Pos = -3
+            //Scale = 5 Pos = -3.5
             yield return new WaitForSeconds(.000001f);
         }
 
-        transform.parent.localRotation = Quaternion.identity;
-        transform.parent.localScale = new Vector3(1, 1, 1);
-        gameObject.SetActive(false);
+        ropeLoop.transform.localPosition = new Vector3(-1.5f, 0f, -1f);
+        rotate.localRotation = Quaternion.identity;
+        transform.parent.localScale = new Vector3(1f, 1f, 1f);
+        rotate.gameObject.SetActive(false);
     }
 }
