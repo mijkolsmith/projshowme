@@ -13,7 +13,7 @@ public class GrapplingHook : MonoBehaviour
     {
         this.rotate = rotate;
 
-        dir = player.GetComponentInChildren<Camera>().ScreenToWorldPoint(Input.mousePosition) - player.transform.localPosition;
+        dir = player.GetComponentInChildren<Camera>().ScreenToWorldPoint(Input.mousePosition) - player.transform.position;
         float angleRad;
         float angleDeg;
         if (player.facingRight)
