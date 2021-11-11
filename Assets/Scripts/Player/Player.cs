@@ -26,6 +26,9 @@ public class Player : MonoBehaviour
     private float horizontalMove = 0f;
     public float runSpeed = 40f;
     public float speedBoost;
+    public GameObject speedBoost2p;
+    public GameObject speedBoost3p;
+
     private bool jump = false;
     private string horizontalString;
     private string jumpString;
